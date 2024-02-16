@@ -1,4 +1,4 @@
-const getAllContacts = store => store.contacts;
+export const getAllContacts = store => store.contacts;
 
 export const getFilteredContacts = store => {
   const { contacts, filter } = store;
@@ -7,8 +7,8 @@ export const getFilteredContacts = store => {
   }
   const normalizedFilter = filter.toLowerCase();
   const filteredContacts = contacts.filter(contacts => {
-    const normalizedName = contacts.name.toLoverCase();
-    return normalizedName.includes(normalizedFilter);
+    const normolizedName = contacts.name.toLowerCase();
+    return normolizedName.includes(normalizedFilter);
   });
   return filteredContacts;
 };

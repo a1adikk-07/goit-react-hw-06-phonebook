@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { persistStore } from 'redux-persist';
 import {
   persistStore,
   FLUSH,
@@ -21,4 +20,4 @@ export const store = configureStore({
     }),
 });
 
-export const persiste = persistStore(store);
+export const persistor = persistStore(store);
