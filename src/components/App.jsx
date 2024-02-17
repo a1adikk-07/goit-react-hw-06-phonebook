@@ -3,8 +3,8 @@ import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
 import { addContact, deleteContact } from '../redux/contacts/contacts-slice';
-import { setFilter } from 'redux/filter/filter-slice';
-import { getFilteredContacts } from 'redux/contacts/contacts-selector';
+import { setFilter } from '../redux/filter/filter-slice';
+import { getFilteredContacts } from '../redux/contacts/contacts-selector';
 
 const App = () => {
   const contacts = useSelector(getFilteredContacts);
