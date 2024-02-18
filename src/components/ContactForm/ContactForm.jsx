@@ -1,5 +1,5 @@
-import { useState, useMemo, memo, useCallback } from 'react';
-import { nanoid } from 'nanoid';
+import { useState, memo, useCallback } from 'react';
+// import { nanoid } from 'nanoid';
 import style from '../ContactForm/contact-form.module.css';
 
 const INITIAL_STATE = {
