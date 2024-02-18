@@ -28,33 +28,41 @@ const ContactForm = ({ onSubmit }) => {
     setState({ ...INITIAL_STATE });
   }, []);
 
-  const phoneBookID = useMemo(() => nanoid(), []);
-  const phoneNumberID = useMemo(() => nanoid(), []);
+  // const phoneBookID = useMemo(() => nanoid(), []);
+  // const phoneNumberID = useMemo(() => nanoid(), []);
 
   const { name, number } = state;
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={style.phoneBook}>
-        <label htmlFor={phoneBookID}>Name</label>
+        <label
+        // htmlFor={phoneBookID}
+        >
+          Name
+        </label>
         <input
           className={style.input}
           value={name}
           type="text"
           name="name"
           onChange={handleChange}
-          id={phoneBookID}
+          // id={phoneBookID}
           placeholder="enter new contact"
           required
         ></input>
-        <label htmlFor={phoneNumberID}>Number</label>
+        <label
+        // htmlFor={phoneNumberID}
+        >
+          Number
+        </label>
         <input
           className={style.input}
           value={number}
           type="tel"
           name="number"
           onChange={handleChange}
-          id={phoneNumberID}
+          // id={phoneNumberID}
           placeholder="enter phone number"
           required
         ></input>
