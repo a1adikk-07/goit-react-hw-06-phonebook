@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   number: '',
 };
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
   const contacts = useSelector(getFilteredContacts);
 
   const isDublicate = ({ name }) => {
@@ -35,7 +35,7 @@ export const ContactForm = ({ onSubmit }) => {
     const handleSubmit = evt => {
       evt.preventDefault();
 
-      onSubmit({ ...state });
+      // onSubmit({ ...state });
 
       reset();
     };
@@ -45,7 +45,7 @@ export const ContactForm = ({ onSubmit }) => {
     };
 
     const { name, number } = state;
-    onSubmit = { onAddContact };
+    // onSubmit = { onAddContact };
 
     return (
       <form onSubmit={handleSubmit}>
