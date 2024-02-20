@@ -1,23 +1,24 @@
 import styles from '../ContactList/contact-list.module.css';
+// import { useSelector } from 'react-redux';
 
-const ContactList = ({ items, deleteContact }) => {
-  const elements = items.map(({ id, name, number }) => (
-    <li key={id} className={styles.contacts}>
-      {name}: {number}{' '}
-      <button
-        className={styles.delete}
-        onClick={() => deleteContact(id)}
-        type="button"
-      >
-        Delete
-      </button>
-    </li>
-  ));
+export const deleteContact = ({ items }) => {
   return (
     <>
-      <ul className={styles.list}>{elements}</ul>
+      <ul className={styles.list}>
+        {items.map(({ id, name, number }) => (
+          <li key={id} className={styles.contacts}>
+            {name}: {number}{' '}
+            <button
+              className={styles.delete}
+              onClick={() => deleteContact(id)}
+              type="button"
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
-
-export default ContactList;
+// };
