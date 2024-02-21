@@ -1,14 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { ContactForm } from '../components/ContactForm/ContactForm';
-import { deleteContact } from '../components/ContactList/ContactList';
-import { Filter } from '../components/Filter/Filter';
+import DeleteMyContact from './ContactList/ContactList';
+import Filter from '../components/Filter/Filter';
 // import { addContact, deleteContact } from '../redux/contacts/contacts-slice';
 // import { setFilter } from '../redux/filter/filter-slice';
-import { getFilteredContacts } from '../redux/contacts/contacts-selector';
+// import { getFilteredContacts } from '../redux/contacts/contacts-selector';
 
-export const App = () => {
-  const contacts = useSelector(getFilteredContacts);
-  const dispatch = useDispatch();
+function App() {
+  // const contacts = useSelector(getFilteredContacts);
+  // const dispatch = useDispatch();
 
   // const isDublicate = ({ name }) => {
   //   const normolizedName = name.toLowerCase();
@@ -28,23 +28,21 @@ export const App = () => {
   //   dispatch(action);
   // };
 
-  const onDeleteContact = id => {
-    dispatch(deleteContact(id));
-  };
+  // const onDeleteContact = id => {
+  //   dispatch(deleteContact(id));
+  // };
 
   // const changeFilter = ({ target }) => dispatch(setFilter(target.value));
 
   return (
     <div>
       <h1>Your phonebook</h1>
-      <ContactForm
-      // onSubmit={onAddContact}
-      />
+      <ContactForm />
       <h2>Contacts</h2>
-      <Filter
-      // changeFilter={changeFilter}
-      />
-      <deleteContact items={contacts} deleteContact={onDeleteContact} />
+      <Filter />
+      <DeleteMyContact />
     </div>
   );
-};
+}
+
+export default App;
