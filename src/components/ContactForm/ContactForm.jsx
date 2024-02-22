@@ -1,17 +1,26 @@
 import { useSelector, useDispatch } from 'react-redux';
+import useForm from 'components/hooks/useForm';
+import { useMemo } from 'react';
+import { nanoid } from 'nanoid';
 import { addContact } from '../../redux/contacts/contacts-slice';
-import { setFilter } from '../../redux/filter/filter-slice';
-import style from '../ContactForm/contact-form.module.css';
-import { getFilteredContacts } from '../../redux/contacts/contacts-selector';
+// import { setFilter } from '../../redux/filter/filter-slice';
+import { getAllContacts } from '../../redux/contacts/contacts-selector';
+import styles from '../ContactForm/contact-form.module.css';
+// import { deleteContact } from '../../redux/contacts/contacts-slice';
 
-// const INITIAL_STATE = {
-//   name: '',
-//   number: '',
-// };
+const INITIAL_STATE = {
+  name: '',
+  number: '',
+};
 
-export const ContactForm = () => {
-  const contacts = useSelector(getFilteredContacts);
+const ContactForm = () => {
+  const contacts = useSelector(getAllContacts);
   const dispatch = useDispatch();
+
+  const { state, handleChange, reset } = useForm(INITIAL_STATE);
+
+  const contactId = useMemo(() => nanoid(), []);
+  const numberId = useMemo(() => nanoid(), []);
 
   const isDublicate = ({ name }) => {
     const normolizedName = name.toLowerCase();
@@ -22,75 +31,66 @@ export const ContactForm = () => {
     return Boolean(dublicate);
   };
 
-  const onAddContact = data => {
-    if (isDublicate(data)) {
-      return alert(` ${data.name} is already in contacts`);
+  const onAddContact = e => {
+    e.preventDefault();
+    if (isDublicate(state)) {
+      return alert(
+        `You've already added ${state.name} or a number ${state.number} to your phonebook.`
+      );
     }
 
-    const action = addContact(data);
+    const action = addContact(state);
     dispatch(action);
+    reset();
   };
 
-  // const onDeleteContact = id => {
-  //   dispatch(deleteContact(id));
-  // };
-
-  const changeFilter = ({ target }) => dispatch(setFilter(target.value));
-
-  // const [state, setState] = { ...INITIAL_STATE };
-
-  // const handleChange = ({ target }) => {
-  //   const { name, value } = target;
-
-  //   setState(prevState => ({ ...prevState, [name]: value }));
-  // };
-
-  // const handleSubmit = evt => {
-  //   evt.preventDefault();
-
-  //   onSubmit({ ...state });
-
-  //   reset();
-  // };
-
-  // const reset = () => {
-  //   setState({ ...INITIAL_STATE });
-  // };
-
-  // const { name, number } = state;
-  // onSubmit = { onAddContact };
+  const { name, number } = state;
 
   return (
-    <form>
-      <div className={style.phoneBook}>
-        <label>Name</label>
-        <input
-          className={style.input}
-          // value={name}
-          type="text"
-          name="name"
-          onChange={handleChange}
-          placeholder="enter new contact"
-          required
-        ></input>
-        <label>Number</label>
-        <input
-          className={style.input}
-          // value={number}
-          type="tel"
-          name="number"
-          onChange={changeFilter}
-          placeholder="enter phone number"
-          required
-        ></input>
-        <button
-          onAddContact={onAddContact}
-          className={style.phoneBtn}
-          type="submit"
-        >
-          Add contact
-        </button>
+    <form onSubmit={onAddContact} className={styles.form}>
+      <div className={styles.phoneWrap}>
+        <h3 className={styles.title}>Phonebook</h3>
+        <div>
+          <label htmlFor={contactId} className={styles.label}>
+            Name
+          </label>
+          <input
+            className={styles.input}
+            value={name}
+            required
+            name="name"
+            onChange={handleChange}
+            id={contactId}
+            type="text"
+            placeholder="Enter a name"
+          />
+        </div>
       </div>
+      <div className={styles.contactsWrap}>
+        <div>
+          <label htmlFor={numberId} className={styles.label}>
+            Number
+          </label>
+          <input
+            className={styles.input}
+            value={number}
+            required
+            name="number"
+            onChange={handleChange}
+            id={numberId}
+            type="tel"
+            placeholder="Enter a number"
+            min="8"
+            max="8"
+            step="1"
+          />
+        </div>
+      </div>
+      <button type="submit" className={styles.btn}>
+        Add contact
+      </button>
     </form>
   );
 };
+
+export default ContactForm;

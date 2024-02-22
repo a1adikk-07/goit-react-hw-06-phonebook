@@ -1,30 +1,29 @@
-import React from 'react';
+// import React from 'react';
 import styles from '../ContactList/contact-list.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-// import filterSlice from '../../redux/filter/filter-slice';
 import { deleteContact } from '../../redux/contacts/contacts-slice';
+import { getFilteredContacts } from '../../redux/contacts/contacts-selector';
 
-const DeleteMyContact = () => {
-  const contacts = useSelector(state => state.items);
+export const ContactList = () => {
+  const contacts = useSelector(getFilteredContacts);
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filterSlice);
 
-  const searchName = () => {
-    return contacts.filter(cont => cont.name.toLowerCase().includes(filter));
+  const onRemoveContact = id => {
+    dispatch(deleteContact(id));
   };
 
   return (
     <>
       <ul className={styles.list}>
-        {searchName().map(({ id, name, number }) => (
-          <li key={id} className={styles.contacts}>
-            {name}: {number}
+        {contacts.map(({ id, name, number }) => (
+          <li key={id} className={styles.contact}>
+            {name} {number}{' '}
             <button
-              className={styles.delete}
-              onClick={() => dispatch(deleteContact(id))}
+              onClick={() => onRemoveContact(id)}
               type="button"
+              className={styles.delete}
             >
-              ❌
+              x
             </button>
           </li>
         ))}
@@ -32,5 +31,3 @@ const DeleteMyContact = () => {
     </>
   );
 };
-
-export default DeleteMyContact;

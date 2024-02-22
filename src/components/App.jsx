@@ -1,8 +1,8 @@
 // import { useSelector, useDispatch } from 'react-redux';
-import { ContactForm } from '../components/ContactForm/ContactForm';
-import DeleteMyContact from './ContactList/ContactList';
+import ContactForm from '../components/ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
-// import { addContact, deleteContact } from '../redux/contacts/contacts-slice';
+import styles from './app-style.module.css';
 // import { setFilter } from '../redux/filter/filter-slice';
 // import { getFilteredContacts } from '../redux/contacts/contacts-selector';
 
@@ -35,12 +35,16 @@ function App() {
   // const changeFilter = ({ target }) => dispatch(setFilter(target.value));
 
   return (
-    <div>
-      <h1>Your phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <DeleteMyContact />
+    <div className={styles.appdiv}>
+      <div>
+        <h1 className={styles.appTitle}>Your phonebook</h1>
+        <ContactForm />
+      </div>
+      <div className={styles.listContacts}>
+        <h1 className={styles.appTitle}>Contacts</h1>
+        <Filter />
+        <ContactList />
+      </div>
     </div>
   );
 }
