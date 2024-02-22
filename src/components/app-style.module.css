@@ -1,6 +1,6 @@
 .appdiv {
   display: flex;
-  align-items: start;
+  /* align-items: start; */
   justify-content: center;
   gap: 300px;
 }
