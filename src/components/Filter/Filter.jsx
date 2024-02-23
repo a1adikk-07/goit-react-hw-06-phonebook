@@ -8,17 +8,15 @@ const Filter = () => {
 
   return (
     <div className={style.filter}>
-      <label htmlFor="filterID">
-        Find contact by name
-        <input
-          className={style.input}
-          onChange={e => dispatch(setFilter(e.currentTarget.value))}
-          value={value}
-          name="filter"
-          placeholder="Search"
-          type="text"
-        />
-      </label>
+      <label htmlFor="filterID">Find contact by name</label>
+      <input
+        className={style.input}
+        onChange={e => dispatch(setFilter(e.currentTarget.value))}
+        value={value}
+        name="filter"
+        placeholder="Search"
+        type="text"
+      />
     </div>
   );
 };

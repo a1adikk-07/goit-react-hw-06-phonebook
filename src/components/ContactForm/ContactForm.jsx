@@ -1,10 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import useForm from 'components/hooks/useForm';
-import { useMemo } from 'react';
-import { nanoid } from 'nanoid';
 import { addContact } from '../../redux/contacts/contacts-slice';
 // import { setFilter } from '../../redux/filter/filter-slice';
-import { getAllContacts } from '../../redux/contacts/contacts-selector';
+import { getFilteredContactsSelector } from '../../redux/contacts/contacts-selector';
 import styles from '../ContactForm/contact-form.module.css';
 // import { deleteContact } from '../../redux/contacts/contacts-slice';
 
@@ -14,13 +12,10 @@ const INITIAL_STATE = {
 };
 
 const ContactForm = () => {
-  const contacts = useSelector(getAllContacts);
+  const contacts = useSelector(getFilteredContactsSelector);
   const dispatch = useDispatch();
 
   const { state, handleChange, reset } = useForm(INITIAL_STATE);
-
-  const contactId = useMemo(() => nanoid(), []);
-  const numberId = useMemo(() => nanoid(), []);
 
   const isDublicate = ({ name }) => {
     const normolizedName = name.toLowerCase();
@@ -51,7 +46,10 @@ const ContactForm = () => {
       <div className={styles.phoneWrap}>
         <h3 className={styles.title}>Phonebook</h3>
         <div>
-          <label htmlFor={contactId} className={styles.label}>
+          <label
+            // htmlFor={contactId}
+            className={styles.label}
+          >
             Name
           </label>
           <input
@@ -60,7 +58,7 @@ const ContactForm = () => {
             required
             name="name"
             onChange={handleChange}
-            id={contactId}
+            // id={contactId}
             type="text"
             placeholder="Enter a name"
           />
@@ -68,7 +66,10 @@ const ContactForm = () => {
       </div>
       <div className={styles.contactsWrap}>
         <div>
-          <label htmlFor={numberId} className={styles.label}>
+          <label
+            // htmlFor={numberId}
+            className={styles.label}
+          >
             Number
           </label>
           <input
@@ -77,7 +78,7 @@ const ContactForm = () => {
             required
             name="number"
             onChange={handleChange}
-            id={numberId}
+            // id={numberId}
             type="tel"
             placeholder="Enter a number"
             min="8"
