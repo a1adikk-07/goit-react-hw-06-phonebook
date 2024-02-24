@@ -44,7 +44,6 @@ const ContactForm = () => {
   return (
     <form onSubmit={onAddContact} className={styles.form}>
       <div className={styles.phoneWrap}>
-        <h3 className={styles.title}>Phonebook</h3>
         <div>
           <label
             // htmlFor={contactId}
